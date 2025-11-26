@@ -10,6 +10,14 @@ export default function MobileSlider() {
     const [index, setIndex] = useState(0);
     const [expanded, setExpanded] = useState(false);
     const [direction, setDirection] = useState(0);
+    const [text, setText] = useState("");
+
+    const handleSubmit = () => {
+        if (text.trim() !== "") {
+            console.log("Submitted Text:", text);
+            setText("");
+        }
+    };
 
     const mobileText =
         "Breakfast, often referred to as the ‘most important meal of the day’, provides essential nutrients to kick start our day. It includes a variety of foods, like fruits, cereals, dairy products, and proteins, that contribute to a balanced diet.";
@@ -52,6 +60,9 @@ export default function MobileSlider() {
             <div className="relative z-40 mb-5 flex items-center bg-white rounded-xl px-4 py-1 md:max-w-md mx-auto">
                 <Search size={22} className="text-gray-900" />
                 <input
+                    value={text}
+                    onChange={(e) => setText(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
                     className="w-full ml-3 text-gray-800 outline-none bg-transparent placeholder:text-gray-800 placeholder:font-[600]"
                     placeholder="Search..."
                 />
@@ -112,7 +123,7 @@ export default function MobileSlider() {
             </div>
 
             {/* Thumbnail Indicators */}
-            <div className="relative z-40 flex gap-4 justify-center flex-wrap md:gap-6">
+            <div className="relative z-40 flex gap-4 justify-center flex-wrap md:gap-6 mt-16">
                 {items.map((item, i) => (
                     <div key={i} className="flex flex-col items-center cursor-pointer">
                         <img

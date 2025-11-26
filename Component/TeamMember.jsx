@@ -34,27 +34,29 @@ function TeamMember() {
                     </p>
                 </div>
 
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-6xl mx-auto relative">
-                    {teamData.map((member, i) => (
-                        <motion.div
-                            key={member.id}
-                            className="text-center"
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true, amount: 0.4 }}
-                            variants={cornerVariants[i]}
-                        >
-                            <Image
-                                src={member.image}
-                                alt={member.name}
-                                width={250}
-                                height={250}
-                                className="w-full h-48 sm:h-56 object-contain"
-                            />
-                            <h3 className="text-[16px] font-[600] text-[#4F4F4F] mt-2">{member.name}</h3>
-                            <p className="text-[#828282] text-[14px] font-[400]">{member.role}</p>
-                        </motion.div>
-                    ))}
+                <div className="overflow-hidden">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-6xl mx-auto relative">
+                        {teamData.map((member, i) => (
+                            <motion.div
+                                key={member.id}
+                                className="text-center"
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true, amount: 0.4 }}
+                                variants={cornerVariants[i]}
+                            >
+                                <Image
+                                    src={member.image}
+                                    alt={member.name}
+                                    width={250}
+                                    height={250}
+                                    className="w-full h-48 sm:h-56 object-contain"
+                                />
+                                <h3 className="text-[16px] font-[600] text-[#4F4F4F] mt-2">{member.name}</h3>
+                                <p className="text-[#828282] text-[14px] font-[400]">{member.role}</p>
+                            </motion.div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>
