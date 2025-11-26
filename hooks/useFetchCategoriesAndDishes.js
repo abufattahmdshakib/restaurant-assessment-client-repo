@@ -9,11 +9,11 @@ export function useFetchCategoriesAndDishes() {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const resCat = await fetch("http://localhost:5000/api/categories");
+        const resCat = await fetch("https://restaurant-assessment-server.vercel.app/api/categories");
         const catData = await resCat.json();
         if (resCat.ok) setCategories(["All", ...catData.map(c => c.name)]);
 
-        const resFood = await fetch("http://localhost:5000/api/foods");
+        const resFood = await fetch("https://restaurant-assessment-server.vercel.app/api/foods");
         const foodData = await resFood.json();
         if (resFood.ok) setDishesData(foodData);
       } catch (err) {
@@ -26,6 +26,6 @@ export function useFetchCategoriesAndDishes() {
     fetchData();
   }, []);
 
-  
+
   return { categories, setCategories, dishesData, setDishesData, loading, setLoading };
 }
