@@ -19,10 +19,10 @@ function TeamMember() {
             <div className="max-w-5xl mx-auto h-full flex flex-col justify-center items-center px-2">
                 {/* Center Heading */}
                 <div className="text-center max-w-2xl mx-auto px-4 sm:mb-12 mt-24">
-                    <h1 className="text-white text-3xl md:text-4xl font-[600] hidden sm:block">
+                    <h1 className="text-[#FFFFFF] text-3xl md:text-4xl font-[600] hidden sm:block">
                         Team Member
                     </h1>
-                    <p className="text-gray-200 text-base md:text-[14px] hidden sm:block">
+                    <p className="text-[#FFFFFF] text-base md:text-[14px] hidden sm:block">
                         Our team brings together passion, expertise, and <br /> dedication to deliver
                         outstanding results.
                     </p>

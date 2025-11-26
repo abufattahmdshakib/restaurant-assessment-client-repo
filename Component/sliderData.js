@@ -1,0 +1,38 @@
+export const items = [
+  {
+    id: 1,
+    title: "Waffles",
+    thumbnail: "/assist/thumbs-2.png",
+    large: "/assist/thumbs-2.png",
+    bg: "#880808",
+    leftShape: "#c26a86",
+    rightShape: "#c26a86",
+  },
+  {
+    id: 2,
+    title: "French Toast",
+    thumbnail: "/assist/thumbs-2.png",
+    large: "/assist/thumbs-2.png",
+    bg: "#1f4b63",
+    leftShape: "#356780",
+    rightShape: "#356780",
+  },
+  {
+    id: 3,
+    title: "Pancakes",
+    thumbnail: "/assist/thumbs-2.png",
+    large: "/assist/thumbs-2.png",
+    bg: "#8b3a6e",
+    leftShape: "#aa5589",
+    rightShape: "#aa5589",
+  },
+  {
+    id: 4,
+    title: "Crepes",
+    thumbnail: "/assist/thumbs-2.png",
+    large: "/assist/thumbs-2.png",
+    bg: "#0f5959",
+    leftShape: "#1c7474",
+    rightShape: "#1c7474",
+  },
+];
