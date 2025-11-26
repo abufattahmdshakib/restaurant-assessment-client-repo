@@ -57,7 +57,7 @@ export default function AddFoodForm({
         img: imgURL,
       };
 
-      const res = await fetch("http://localhost:5000/api/foods", {
+      const res = await fetch("https://restaurant-assessment-server.vercel.app/api/foods", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(foodData),
@@ -83,7 +83,7 @@ export default function AddFoodForm({
       className="fixed inset-0 bg-black/80 flex justify-center items-center z-50"
       onClick={() => {
         setShowAddFood(false);
-        resetForm(); // clear form when closing
+        resetForm(); 
       }}
     >
       <div

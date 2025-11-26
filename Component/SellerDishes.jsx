@@ -57,7 +57,7 @@ function SellerDishes() {
 
       {/* Category Filter */}
       <CategoryFilter
-        categories={categoriesWithAll} // <-- All button added here
+        categories={categoriesWithAll} 
         setCategories={setCategories}
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}

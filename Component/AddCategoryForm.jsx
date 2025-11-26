@@ -19,7 +19,7 @@ export default function AddCategoryForm({
     }
 
     try {
-      const res = await fetch("http://localhost:5000/api/categories", {
+      const res = await fetch("https://restaurant-assessment-server.vercel.app/api/categories", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: trimmed }),

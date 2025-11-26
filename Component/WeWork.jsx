@@ -35,12 +35,12 @@ function WeWork() {
                 <motion.div
                     className="flex"
                     style={{ width: "max-content" }}
-                    animate={{ x: ["-50%", "0%"] }} // scroll half, because images are duplicated
+                    animate={{ x: ["-50%", "0%"] }} 
                     transition={{
                         x: {
                             repeat: Infinity,
                             repeatType: "loop",
-                            duration: 10, // smooth speed
+                            duration: 10, 
                             ease: "linear",
                         },
                     }}

@@ -40,7 +40,7 @@ export default function CategoryFilter({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [openDropdown]);
 
-  // Ensure "All" button is always first
+  
   const categoriesWithAll = ["All", ...categories.filter(cat => cat !== "All")];
 
   return (
