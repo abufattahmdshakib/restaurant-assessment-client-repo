@@ -1,17 +1,14 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import CategoryFilter from "./CategoryFilter";
 import DishCard from "./DishCard";
-
+import { useFetchCategoriesAndDishes } from "../hooks/useFetchCategoriesAndDishes";
 
 function SellerDishes() {
   const IMGBB_API_KEY = "077d9c3c5de79bf9f91643037ed35fc4";
 
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [categories, setCategories] = useState(["All"]);
-  const [dishesData, setDishesData] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   const [foodForm, setFoodForm] = useState({
     name: "",
@@ -22,38 +19,28 @@ function SellerDishes() {
   });
 
   const [newCategory, setNewCategory] = useState("");
+  const [showAddCategory, setShowAddCategory] = useState(false);
 
-  // Fetch categories & dishes
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const resCat = await fetch("http://localhost:5000/api/categories");
-        const catData = await resCat.json();
-        if (resCat.ok) setCategories(["All", ...catData.map(c => c.name)]);
-
-        const resFood = await fetch("http://localhost:5000/api/foods");
-        const foodData = await resFood.json();
-        if (resFood.ok) setDishesData(foodData);
-      } catch (err) {
-        console.error("Network error:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
+  // fetch categories & dishes
+  const {
+    categories,
+    setCategories,
+    dishesData,
+    setDishesData,
+    loading,
+    setLoading
+  } = useFetchCategoriesAndDishes();
 
   // Filter & sort dishes
   let filteredDishes =
     selectedCategory === "All"
       ? [...dishesData]
       : dishesData.filter((dish) => dish.category === selectedCategory);
-      
+
   filteredDishes.sort((a, b) => b.rating - a.rating);
 
   return (
-    <div className="max-w-6xl mx-auto py-10 mt-6 sm:mt-12 ">
+    <div className="max-w-6xl mx-auto py-10 mt-6 sm:mt-12">
       <div className="text-center mb-8 px-2">
         <h1 className="text-3xl sm:text-5xl font-bold text-[#1F1F1F]">Our best Seller Dishes</h1>
         <p className="text-base sm:text-[21px] text-[#5C5C5C] max-w-3xl mx-auto mt-2">
@@ -61,6 +48,7 @@ function SellerDishes() {
         </p>
       </div>
 
+      {/* Category Filter + AddCategoryForm */}
       <CategoryFilter
         categories={categories}
         setCategories={setCategories}
@@ -75,6 +63,8 @@ function SellerDishes() {
         IMGBB_API_KEY={IMGBB_API_KEY}
         newCategory={newCategory}
         setNewCategory={setNewCategory}
+        showAddCategory={showAddCategory}
+        setShowAddCategory={setShowAddCategory}
       />
 
       {loading ? (
@@ -82,7 +72,7 @@ function SellerDishes() {
           Loading dishes...
         </div>
       ) : (
-        <div  className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 px-2 gap-x-3 gap-y-1 sm:gap-x-8 sm:gap-y-0">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 px-2 gap-x-3 gap-y-1 sm:gap-x-8 sm:gap-y-0">
           {filteredDishes.length > 0 ? (
             filteredDishes.map((dish) => (
               <DishCard key={dish.id || dish._id} dish={dish} />
@@ -93,7 +83,6 @@ function SellerDishes() {
             </div>
           )}
         </div>
-
       )}
     </div>
   );

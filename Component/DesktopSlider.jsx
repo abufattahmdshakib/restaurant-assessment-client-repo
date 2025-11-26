@@ -7,7 +7,7 @@ import { items } from "./sliderData";
 export default function DesktopSlider() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [prevIndex, setPrevIndex] = useState(0);
-  const [direction, setDirection] = useState("up");
+  const [direction, setDirection] = useState("up"); 
   const [animating, setAnimating] = useState(false);
 
   const handleChange = (i) => {
