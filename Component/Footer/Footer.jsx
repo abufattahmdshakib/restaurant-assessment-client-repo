@@ -1,9 +1,21 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaClock } from "react-icons/fa";
 import { IoIosSend } from "react-icons/io";
 
 function Footer() {
+    const [email, setEmail] = React.useState("");
+
+    const handleSubmit = () => {
+        if (email.trim() !== "") {
+            console.log("Submitted Email:", email);
+            setEmail("");
+        }
+    };
+
+
     const instagramImages = [
         "/assist/unsplash_in-ga.svg",
         "/assist/unsplash_in-ga (2).svg",
@@ -33,10 +45,16 @@ function Footer() {
                     <div className="flex mb-4">
                         <input
                             type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
                             placeholder="Enter Your Email"
                             className="w-44 py-2 px-4 rounded-l-md bg-white text-black placeholder:text-gray-500 focus:outline-none focus:ring-0"
                         />
-                        <button className="bg-[#c60b0b] py-2 px-3 rounded-r-md">
+                        <button
+                            onClick={handleSubmit}
+                            className="bg-[#c60b0b] py-2 px-3 rounded-r-md"
+                        >
                             <IoIosSend className="w-5 h-5 text-white text-lg" />
                         </button>
                     </div>
@@ -86,15 +104,15 @@ function Footer() {
                 </div>
 
                 {/* Instagram Gallery */}
-                <div className="flex flex-col hidden sm:flex">
+                <div className="flex flex-col hidden sm:flex -ml-12">
                     <h2 className="font-bold text-[20px] sm:text-[22px] mb-4">Instagram Gallery</h2>
-                    <div className="grid grid-cols-3 gap-2 justify-items-start">
+                    <div className="grid grid-cols-3 gap-x-3 gap-y-3 justify-items-start w-[230px] sm:w-[260px] lg:w-[300px]">
                         {instagramImages.map((img, idx) => (
                             <img
                                 key={idx}
                                 src={img}
                                 alt={`Instagram ${idx + 1}`}
-                                className="w-full h-24 object-contain"
+                                className="w-[85px] h-[85px] sm:w-[95px] sm:h-[95px] lg:w-[105px] lg:h-[105px] object-cover"
                             />
                         ))}
                     </div>

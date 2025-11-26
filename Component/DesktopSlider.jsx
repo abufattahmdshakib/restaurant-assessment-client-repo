@@ -1,78 +1,115 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
 import { Search } from "lucide-react";
 import { items } from "./sliderData";
 
 export default function DesktopSlider() {
-  const [active, setActive] = useState(items[0]);
-  const [index, setIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [prevIndex, setPrevIndex] = useState(0);
+  const [direction, setDirection] = useState("up");
+  const [animating, setAnimating] = useState(false);
 
-  const handleChange = (item, i) => {
-    setActive(item);
-    setIndex(i);
+  const handleChange = (i) => {
+    if (i === activeIndex || animating) return;
+
+    setDirection(i > activeIndex ? "up" : "down");
+    setPrevIndex(activeIndex);
+    setActiveIndex(i);
+    setAnimating(true);
+
+    setTimeout(() => setAnimating(false), 2000);
   };
+
+  const active = items[activeIndex];
+  const prev = items[prevIndex];
 
   return (
     <div
-      className="hidden sm:block rounded-b-2xl relative w-full min-h-[95vh] text-white px-10 py-10 overflow-hidden"
+      className="hidden md:block rounded-b-2xl relative w-full min-h-[70vh] lg:min-h-[60vh] xl:min-h-[50vh] 2xl:min-h-[40vh] text-white px-6 md:px-10 py-6 md:py-10 overflow-hidden"
       style={{ backgroundColor: active.bg }}
     >
       {/* SHAPES */}
       <div
-        className="absolute -left-40 -top-40 w-[700px] h-[700px] rounded-full opacity-35 z-10"
+        className="absolute -left-32 -top-32 md:-left-40 md:-top-40 w-72 md:w-[700px] h-72 md:h-[700px] rounded-full opacity-35 z-10"
         style={{ backgroundColor: active.leftShape }}
-      />
-      <div
-        className="absolute -right-40 -bottom-40 w-[550px] h-[550px] rounded-full opacity-35 z-10"
-        style={{ backgroundColor: active.rightShape }}
       />
 
       {/* HEADER */}
-      <div className="flex justify-between -mt-2 mb-12 relative z-40">
-        <h1 className="text-[28px] font-bold">RESTAURANT</h1>
-        <div className="flex items-center w-full max-w-lg bg-white rounded-xl px-5 py-[6px] shadow-xl">
-          <Search className="text-gray-800" size={24} />
+      <div className="flex flex-col md:flex-row justify-between mb-8 md:mb-12 relative z-40 gap-4 md:gap-0">
+        <h1 className="text-2xl md:text-[28px] font-bold">RESTAURANT</h1>
+        <div className="flex items-center w-full md:max-w-lg bg-white rounded-xl px-4 md:px-5 py-2 md:py-[12px] shadow-xl">
+          <Search className="text-gray-800" size={20} />
           <input
             type="text"
             placeholder="Search...."
-            className="flex-1 ml-3 text-gray-700 bg-transparent outline-none text-sm placeholder:text-gray-800 placeholder:font-[700] placeholder:text-[17px]"
+            className="flex-1 ml-2 md:ml-3 text-gray-700 bg-transparent outline-none text-sm md:text-sm placeholder:text-gray-800 placeholder:font-[700] placeholder:text-[15px] md:placeholder:text-[17px]"
           />
         </div>
       </div>
 
       {/* CONTENT */}
-      <div className="flex justify-between items-center relative z-40">
+      <div className="flex flex-col lg:flex-row justify-between items-center relative z-40 gap-6 lg:gap-0">
         {/* LEFT TEXT */}
-        <div className="w-2/3">
-          <h2 className="text-[62px] font-[400]">BREAKFAST</h2>
-          <p className="max-w-2xl text-[15px] text-left text-white/85 leading-relaxed mb-8">
+        <div className="w-full lg:w-2/3 -mt-20">
+          <h2 className="text-[32px] sm:text-[42px] md:text-[52px] lg:text-[62px] font-[400]">
+            BREAKFAST
+          </h2>
+          <p className="max-w-2xl text-[14px] sm:text-[15px] md:text-[16px] lg:text-[15px] text-left text-white/85 leading-relaxed mb-6">
             Breakfast, often referred to as the ‘most important meal of the day’, provides essential nutrients to kick start our day. It includes a variety of foods, like fruits, cereals, dairy products, and proteins, that contribute to a balanced diet.
           </p>
 
           {/* Thumbnails */}
-          <div className="flex gap-6">
+          <div className="flex gap-4 md:gap-6 flex-wrap">
             {items.map((item, i) => (
-              <button key={i} onClick={() => handleChange(item, i)} className="relative">
-                <img src={item.thumbnail} className="w-28 h-28 rounded-full" />
-                <div className={`h-[2px] w-full rounded-full ${index === i ? "bg-white" : "bg-transparent"}`} />
+              <button
+                key={i}
+                onClick={() => handleChange(i)}
+                className="relative"
+              >
+                <img
+                  src={item.thumbnail}
+                  className="w-20 h-20 sm:w-24 sm:h-24 md:w-26 md:h-26 rounded-full"
+                />
+                <div
+                  className={`h-[2px] mt-1 w-full rounded-full ${i === activeIndex ? "bg-white" : "bg-transparent"}`}
+                />
               </button>
             ))}
           </div>
         </div>
 
         {/* RIGHT IMAGE */}
-        <motion.div
-          key={active.id}
-          initial={{ x: 200, opacity: 0, scale: 0.8 }}
-          animate={{ x: 0, opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8 }}
-          className="w-[420px] h-[420px] rounded-full mt-6 mr-18 overflow-hidden relative z-20"
-        >
-          <img src={active.large} className="w-full h-full object-cover rounded-full" />
-        </motion.div>
+        <div className="relative flex justify-center items-center z-30  md:w-[550px] lg:w-[500px] md:h-[450px] lg:h-[460px] overflow-hidden rounded-full">
+          {animating && (
+            <img
+              key={`prev-${prev.id}`}
+              src={prev.large}
+              className={`absolute w-full p-12 md:p-18 h-full object-cover rounded-full transition-transform duration-2000 ${direction === "up"
+                ? "animate-slide-out-down"
+                : "animate-slide-out-right"
+                }`}
+            />
+          )}
+
+          <img
+            key={`active-${active.id}`}
+            src={active.large}
+            className={`absolute w-full p-12 md:p-18 h-full object-cover rounded-full transition-transform duration-2000 ${animating
+              ? direction === "up"
+                ? "animate-slide-in-right"
+                : "animate-slide-in-bottom"
+              : ""
+              }`}
+          />
+        </div>
       </div>
+
+      {/* Right Shape */}
+      <div
+        className="absolute -right-32 -bottom-32 md:-right-40 md:-bottom-40 w-72 md:w-[550px] h-72 md:h-[550px] rounded-full opacity-35"
+        style={{ backgroundColor: active.rightShape }}
+      />
     </div>
   );
 }

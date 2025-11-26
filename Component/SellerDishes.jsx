@@ -49,12 +49,11 @@ function SellerDishes() {
     selectedCategory === "All"
       ? [...dishesData]
       : dishesData.filter((dish) => dish.category === selectedCategory);
-
+      
   filteredDishes.sort((a, b) => b.rating - a.rating);
-  if (selectedCategory === "All") filteredDishes = filteredDishes.slice(0, 6);
 
   return (
-    <div className="max-w-6xl mx-auto py-10 ">
+    <div className="max-w-6xl mx-auto py-10 mt-6 sm:mt-12 ">
       <div className="text-center mb-8 px-2">
         <h1 className="text-3xl sm:text-5xl font-bold text-[#1F1F1F]">Our best Seller Dishes</h1>
         <p className="text-base sm:text-[21px] text-[#5C5C5C] max-w-3xl mx-auto mt-2">
@@ -83,7 +82,7 @@ function SellerDishes() {
           Loading dishes...
         </div>
       ) : (
-        <div className="grid grid-cols-2 md:grid-cols-3 px-2 gap-3 sm:gap-8">
+        <div  className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 px-2 gap-x-3 gap-y-1 sm:gap-x-8 sm:gap-y-0">
           {filteredDishes.length > 0 ? (
             filteredDishes.map((dish) => (
               <DishCard key={dish.id || dish._id} dish={dish} />
@@ -94,6 +93,7 @@ function SellerDishes() {
             </div>
           )}
         </div>
+
       )}
     </div>
   );
