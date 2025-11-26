@@ -3,11 +3,12 @@
 import React, { useState } from "react";
 import { Search } from "lucide-react";
 import { items } from "./sliderData";
+import FoodSearchDropdown from "./FoodSearchDropdown";
 
 export default function DesktopSlider() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [prevIndex, setPrevIndex] = useState(0);
-  const [direction, setDirection] = useState("up"); 
+  const [direction, setDirection] = useState("up");
   const [animating, setAnimating] = useState(false);
 
   const handleChange = (i) => {
@@ -38,13 +39,8 @@ export default function DesktopSlider() {
       {/* HEADER */}
       <div className="flex flex-col md:flex-row justify-between mb-8 md:mb-12 relative z-40 gap-4 md:gap-0">
         <h1 className="text-2xl md:text-[28px] font-bold">RESTAURANT</h1>
-        <div className="flex items-center w-full md:max-w-lg bg-white rounded-xl px-4 md:px-5 py-2 md:py-[12px] shadow-xl">
-          <Search className="text-gray-800" size={20} />
-          <input
-            type="text"
-            placeholder="Search...."
-            className="flex-1 ml-2 md:ml-3 text-gray-700 bg-transparent outline-none text-sm md:text-sm placeholder:text-gray-800 placeholder:font-[700] placeholder:text-[15px] md:placeholder:text-[17px]"
-          />
+        <div className="w-full md:max-w-lg">
+          <FoodSearchDropdown />
         </div>
       </div>
 
@@ -65,7 +61,7 @@ export default function DesktopSlider() {
               <button
                 key={i}
                 onClick={() => handleChange(i)}
-                className="relative"
+                className="relative cursor-pointer"
               >
                 <img
                   src={item.thumbnail}
@@ -80,12 +76,12 @@ export default function DesktopSlider() {
         </div>
 
         {/* RIGHT IMAGE */}
-        <div className="relative flex justify-center items-center z-30  md:w-[550px] lg:w-[500px] md:h-[450px] lg:h-[460px] overflow-hidden rounded-full">
+        <div className="relative flex justify-center items-center  md:w-[550px] lg:w-[500px] md:h-[450px] lg:h-[460px] overflow-hidden rounded-full">
           {animating && (
             <img
               key={`prev-${prev.id}`}
               src={prev.large}
-              className={`absolute w-full p-12 md:p-18 h-full object-cover rounded-full transition-transform duration-2000 ${direction === "up"
+              className={`absolute z-20 w-full p-12 md:p-18 h-full object-cover rounded-full transition-transform duration-2000 ${direction === "up"
                 ? "animate-slide-out-down"
                 : "animate-slide-out-right"
                 }`}
@@ -95,7 +91,7 @@ export default function DesktopSlider() {
           <img
             key={`active-${active.id}`}
             src={active.large}
-            className={`absolute w-full p-12 md:p-18 h-full object-cover rounded-full transition-transform duration-2000 ${animating
+            className={`absolute w-full z-20 p-12 md:p-18 h-full object-cover rounded-full transition-transform duration-2000 ${animating
               ? direction === "up"
                 ? "animate-slide-in-right"
                 : "animate-slide-in-bottom"
