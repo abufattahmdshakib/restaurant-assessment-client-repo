@@ -71,7 +71,7 @@ export default function Feedback() {
                 <span
                   key={i}
                   onClick={() => setCurrentIndex(i)}
-                  className={`w-3 h-3 rounded-full cursor-pointer ${
+                  className={`sm:w-3 w-5 h-5 sm:h-3 rounded-full cursor-pointer ${
                     i === currentIndex ? "bg-[#A52A2A]" : "border border-[#A52A2A]"
                   }`}
                 ></span>
