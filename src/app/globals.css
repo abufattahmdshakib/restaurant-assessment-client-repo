@@ -13,32 +13,153 @@ body {
 }
 
 
-/* New image slides in from right (offscreen) */
+/* ===== Image Animations ===== */
 @keyframes slide-in-right {
-  0% { transform: translateX(250%); opacity: 0; }
-  100% { transform: translateX(0); opacity: 1; }
+  0% {
+    transform: translateX(250%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
-/* New image slides in from bottom (offscreen) */
 @keyframes slide-in-bottom {
-  0% { transform: translateY(250%); opacity: 0; }
-  100% { transform: translateY(0); opacity: 1; }
+  0% {
+    transform: translateY(250%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
-/* Old image slides out to bottom (offscreen) */
 @keyframes slide-out-down {
-  0% { transform: translateY(0); opacity: 1; }
-  100% { transform: translateY(250%); opacity: 0; }
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(250%);
+    opacity: 0;
+  }
 }
 
-/* Old image slides out to right (offscreen) */
 @keyframes slide-out-right {
-  0% { transform: translateX(0); opacity: 1; }
-  100% { transform: translateX(250%); opacity: 0; }
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(250%);
+    opacity: 0;
+  }
 }
 
-/* Animate classes */
-.animate-slide-in-right { animation: slide-in-right 2s forwards; }
-.animate-slide-in-bottom { animation: slide-in-bottom 2s forwards; }
-.animate-slide-out-down { animation: slide-out-down 2s forwards; }
-.animate-slide-out-right { animation: slide-out-right 2s forwards; }
+/* Image animation classes */
+.animate-slide-in-right {
+  animation: slide-in-right 3s cubic-bezier(0.65, 0.05, 0.36, 1) forwards;
+}
+
+.animate-slide-in-bottom {
+  animation: slide-in-bottom 3s cubic-bezier(0.65, 0.05, 0.36, 1) forwards;
+}
+
+.animate-slide-out-down {
+  animation: slide-out-down 3s cubic-bezier(0.65, 0.05, 0.36, 1) forwards;
+}
+
+.animate-slide-out-right {
+  animation: slide-out-right 3s cubic-bezier(0.65, 0.05, 0.36, 1) forwards;
+}
+
+
+/* ===== Shape Animations (Synchronized Direction) ===== */
+@keyframes slide-in-right-Shape {
+  0% {
+    transform: translateX(250%) ;
+    opacity: 0;
+  }
+
+  50% {
+    transform: translateX(60px) ;
+    opacity: 0.7;
+  }
+
+  100% {
+    transform: translateX(0) ;
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-bottom-Shape {
+  0% {
+    transform: translateY(250%) ;
+    opacity: 0;
+  }
+
+  50% {
+    transform: translateY(60px) ;
+    opacity: 0.7;
+  }
+
+  100% {
+    transform: translateY(0)
+  }
+}
+
+@keyframes slide-out-down-Shape {
+  0% {
+    transform: translateY(0) ;
+    opacity: 0;
+  }
+
+  50% {
+    transform: translateY(60px) ;
+    opacity: 0.7;
+  }
+
+  100% {
+    transform: translateY(250%) ;
+    opacity: 1;
+  }
+}
+
+@keyframes slide-out-right-Shape {
+  0% {
+    transform: translateX(0) ;
+    opacity: 0;
+  }
+
+  50% {
+    transform: translateX(60px) ;
+    opacity: 0.7;
+  }
+
+  100% {
+    transform: translateX(250%) ;
+    opacity: 1;
+  }
+}
+
+.animate-slide-in-right-Shape {
+  animation: slide-in-right-Shape 2s cubic-bezier(0.65, 0.05, 0.36, 1) forwards;
+}
+
+.animate-slide-in-bottom-Shape {
+  animation: slide-in-bottom-Shape 2s cubic-bezier(0.65, 0.05, 0.36, 1) forwards;
+}
+
+.animate-slide-out-down-Shape {
+  animation: slide-out-down-Shape 2s cubic-bezier(0.65, 0.05, 0.36, 1) forwards;
+}
+
+.animate-slide-out-right-Shape {
+  animation: slide-out-right-Shape 2s cubic-bezier(0.65, 0.05, 0.36, 1) forwards;
+}

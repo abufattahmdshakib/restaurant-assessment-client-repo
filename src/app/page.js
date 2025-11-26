@@ -7,12 +7,15 @@ import MainSlider from "../../Component/MainSlider";
 
 export default function Home() {
   return (
-    <div className="container mx-auto">
+    <div>
       <MainSlider />
-      <SellerDishes />
-      <Feedback />
-      <TeamMember />
-      <WeWork />
+      <div className="container mx-auto">
+        <SellerDishes />
+        <Feedback />
+        <TeamMember />
+        <WeWork />
+      </div>
     </div>
+
   );
 }
